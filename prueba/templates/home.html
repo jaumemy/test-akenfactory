@@ -17,13 +17,20 @@
 
     <h1>Prueba técnica</h1>
 
+    <h3>Punto 1</h3>
+
     <input type="text" name="date" value="{{date}}" readonly>
 
 
     <h3>Punto 3</h3>
 
 
-    <textarea name="name" rows="50" cols="85" value="" readonly>class Auto:
+    <textarea name="name" rows="60" cols="85" value="" readonly>
+
+## Resolución del problema basado en OOP
+
+
+class Auto:
 
     def __init__(self, modelo, chasis, color, precio):
         self.modelo = modelo
@@ -41,6 +48,8 @@ auto6 = Auto('Peugeot 406', '454FGF454VHGB923GH', 'Blanco', 35000000)
 
 lista_autos = [auto1, auto2, auto3, auto4, auto5, auto6]
 
+# Función que retornará por qué habrá que multiplicar el valor del auto para obtener un incremento del IVA ( 15% será multiplicar por 1.15 etc)
+
 
 def multiplicador_iva(valor):
     if valor <= 20000000:
@@ -53,11 +62,14 @@ multiplicador_iva(65000000)
 #"""1.3"""
 
 
+# Función que toma un string equivalente al color e iterando los atributo de color de la lista de objetos de clase Auto incrementa n, número de autos de ese color y c, cantidad agregada teniendo en cuenta el IVA.
+
 
 def cantidad_color(color):
 
-    c = 0
     n = 0
+    c = 0
+
 
     for auto in lista_autos:
         if color == auto.color:
@@ -75,9 +87,61 @@ cantidad_color('Rojo cereza')
 #"""(3, 109900000.0)"""</textarea>
 
 
+
+    <h3>Punto 5</h3>
+
+    <textarea name="name" rows="50" cols="80" readonly>
+      ## Problema resuelta con OOP
+
+## Inicializamos el círculo con radio y coordenadas del centro y usando el módulo math le añadimos el atributo de su área.
+
+import math
+
+class Circulo:
+
+    def __init__(self, radio, coor_x, coor_y):
+        self.r = radio
+        self.x = coor_x
+        self.y = coor_y
+        self.area = math.pi*self.r**2
+
+c0 = Circulo(3,3,3)
+c1 = Circulo(2,7,7)
+c2 = Circulo(3,8,3)
+
+## Función que toma dos objetos de clase Círculo, calcula la distancia entre centros y la compara con la suma de radios para ver si intersectan
+## Consideramos que dos círculos tangentes intersectan en ese punto
+## Finalmente se comparan las dos áreas y la función retorna dos valores booleanos, uno para ver si intersectan y otro si sus areas tienen el mismo valor.
+
+
+def inter_igual(ca, cb):
+
+    d = math.sqrt((cb.x-ca.x)**2 + (cb.y-ca.y)**2)
+    inter = d <= ca.r + cb.r
+
+    igual = ca.area == cb.area
+
+
+
+    return inter, igual
+
+
+inter_igual(c0, c1)
+#"""(False, False)"""
+inter_igual(c0, c2)
+#"""(True, True)"""
+inter_igual(c1, c2)
+#"""(True, False)"""
+    </textarea>
+
+
     <h3>Punto 6</h3>
 
-    <textarea name="name" rows="13" cols="80" value="" readonly>def factorial(n):
+    <textarea name="name" rows="20" cols="80" value="" readonly>
+
+      ## Función que toma un número entero, y a través de condicionales descartamos la opción de un número negativo, retornamos el caso especial de 0 y para el resto de numeros aplicamos una sencilla lógica iterando todos los números desde 2 hasta n.
+
+      def factorial(n):
         if n < 0:
             raise ValueError("Por favor, introduce un valor positivo.")
 
