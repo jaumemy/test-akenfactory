@@ -25,7 +25,7 @@
     <h3>Punto 3</h3>
 
 
-    <textarea name="name" rows="60" cols="85" value="" readonly>
+    <textarea name="name" rows="60" cols="150" value="" readonly>
 
 ## Resolución del problema basado en OOP
 
@@ -59,7 +59,7 @@ def multiplicador_iva(valor):
         return ((sobrevalor//15000000)*0.05)+1.20
 
 multiplicador_iva(65000000)
-#"""1.3"""
+"""1.3"""
 
 
 # Función que toma un string equivalente al color e iterando los atributo de color de la lista de objetos de clase Auto incrementa n, número de autos de ese color y c, cantidad agregada teniendo en cuenta el IVA.
@@ -81,16 +81,112 @@ def cantidad_color(color):
 
 
 cantidad_color('Negro')
-#"""(1, 138475000.0)"""
+"""(1, 138475000.0)"""
 
 cantidad_color('Rojo cereza')
-#"""(3, 109900000.0)"""</textarea>
+"""(3, 109900000.0)"""</textarea>
+
+
+
+    <h3>Punto 4</h3>
+
+    <textarea name="name" rows="60" cols="150" readonly>
+      ## Definimos a cada usuario o tuitero como un diccionario donde las keys son los otros usuarios y los values 0 o 1 para saber si lo sigue o no. Finalmente juntamos todos estos tuiteros en una lista, que es la red social en sí.
+## Se que no es el método más eficiente ya que implica iterar por todo constantemente pero fue con la opción que me sentía más seguro de resolverlo a día de hoy.
+
+Ana = {'str':'Ana', 'Ana':0, 'Beto':1, 'Carla':0, 'Diego':1, 'Emilia':0, 'Felipe':0}
+Beto = {'str':'Beto', 'Ana':0, 'Beto':0, 'Carla':1, 'Diego':1, 'Emilia':0, 'Felipe':1}
+Carla = {'str':'Carla', 'Ana':1, 'Beto':1, 'Carla':0, 'Diego':1, 'Emilia':1, 'Felipe':1}
+Diego = {'str':'Diego', 'Ana':0, 'Beto':0, 'Carla':0, 'Diego':0, 'Emilia':0, 'Felipe':0}
+Emilia = {'str':'Emilia', 'Ana':0, 'Beto':1, 'Carla':0, 'Diego':1, 'Emilia':0, 'Felipe':1}
+Felipe = {'str':'Felipe', 'Ana':1, 'Beto':0, 'Carla':1, 'Diego':1, 'Emilia':0, 'Felipe':0}
+lista_tuiteros = [Ana, Beto, Carla, Diego, Emilia, Felipe]
+
+
+## Función que itera por las keys del diccionario tuitero y añade 1 cada vez que el value es 1. Retorna la suma de valores 1
+
+def num_sigue(tuitero):
+    n_sigue = 0
+    for key in tuitero:
+        if tuitero[key]==1:
+            n_sigue += 1
+    return n_sigue
+
+num_sigue(Ana)
+"""2"""
+num_sigue(Felipe)
+"""3"""
+
+
+## Función que recibe un tuitero, itera por la lista de tuiteros, y para cada uno de ellos comprueba si siguen a dicho tuitero. Si es así, añade uno al contador y retorna ese valor final.
+
+def num_seguidores(tuitero):
+    n_seguidores = 0
+    for nombre in lista_tuiteros:
+        for key in nombre:
+            if nombre[key]==1 and key==tuitero['str']:
+                n_seguidores += 1
+    return n_seguidores
+
+num_seguidores(Ana)
+"""2"""
+num_seguidores(Felipe)
+"""2"""
+
+
+
+## Función que toma la red social, y va añadiendo a una lista que finalmente retornará, qué tuiteros siguen y son seguidos más veces que n, valor del número de usuarios en la red social.
+
+def tuiteros_activos(red_social):
+    n = len(red_social)
+    lista_tuiteros_activos = []
+
+    for tuitero in red_social:
+        if num_sigue(tuitero)+num_seguidores(tuitero) >= n:
+            lista_tuiteros_activos.append(tuitero['str'])
+
+    return lista_tuiteros_activos
+
+tuiteros_activos(lista_tuiteros)
+"""['Beto', 'Carla', 'Felipe']"""
+
+
+
+# Función que itera el diccionario de tuitero1 para ver si sigue a tuitero 2 y retorna un booleano.
+
+def a_sigue_b(tuitero1, tuitero2):
+    for key in tuitero1:
+        if tuitero1[key]==1 and key==tuitero2['str']:
+            return True
+    return False
+
+a_sigue_b(Ana, Diego)
+"""True"""
+
+
+## Finalmente, esta función aplica la función anterior en un sentido y en otro entre tuiteros y retorna un booleano siguiendo la lógica especificada en el enunciado del problema.
+## Tal y como está definida la función, recibe una red social como variable pero en este caso no se usa ya que la red social está definida anteriormente como una lista de diccionarios.
+## Fuera necesario, podría usarse la variable red_social para iterar por ella de la misma manera.
+## Retorna un valor booleano si ambos sentidos de seguimiento y no seguimiento se cumplen.
+
+def trio_seguimiento(red_social, tuitero1, tuitero2, tuitero3):
+    sentido_directo = a_sigue_b(tuitero1, tuitero2) and a_sigue_b(tuitero2, tuitero3)
+    sentido_indirecto = not(a_sigue_b(tuitero3, tuitero2) or a_sigue_b(tuitero2, tuitero1))
+    return sentido_directo and sentido_indirecto
+
+trio_seguimiento(lista_tuiteros, Diego, Beto, Felipe)
+"""False"""
+
+trio_seguimiento(lista_tuiteros, Ana, Beto, Felipe)
+"""True"""
+    </textarea>
+
 
 
 
     <h3>Punto 5</h3>
 
-    <textarea name="name" rows="50" cols="80" readonly>
+    <textarea name="name" rows="50" cols="150" readonly>
       ## Problema resuelta con OOP
 
 ## Inicializamos el círculo con radio y coordenadas del centro y usando el módulo math le añadimos el atributo de su área.
@@ -127,17 +223,17 @@ def inter_igual(ca, cb):
 
 
 inter_igual(c0, c1)
-#"""(False, False)"""
+"""(False, False)"""
 inter_igual(c0, c2)
-#"""(True, True)"""
+"""(True, True)"""
 inter_igual(c1, c2)
-#"""(True, False)"""
+"""(True, False)"""
     </textarea>
 
 
     <h3>Punto 6</h3>
 
-    <textarea name="name" rows="20" cols="80" value="" readonly>
+    <textarea name="name" rows="20" cols="150" value="" readonly>
 
       ## Función que toma un número entero, y a través de condicionales descartamos la opción de un número negativo, retornamos el caso especial de 0 y para el resto de numeros aplicamos una sencilla lógica iterando todos los números desde 2 hasta n.
 
