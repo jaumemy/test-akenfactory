@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>JMontane</title>
+    <style media="screen">
+      body{
+        margin-left: 30px;
+        margin-top: 30px;
+      }
+    </style>
   </head>
   <body>
 
@@ -13,11 +19,65 @@
 
     <input type="text" name="date" value="{{date}}" readonly>
 
-    <br>
+
+    <h3>Punto 3</h3>
+
+
+    <textarea name="name" rows="50" cols="85" value="" readonly>class Auto:
+
+    def __init__(self, modelo, chasis, color, precio):
+        self.modelo = modelo
+        self.chasis = chasis
+        self.color = color
+        self.precio = precio
+
+
+auto1 = Auto('Logan', '9FBLSRADBFM343217', 'Rojo cereza', 25500000)
+auto2 = Auto('Peugeot 206', '7374FHDFSDFGD634', 'Azul electrico', 30000000)
+auto3 = Auto('Renault Megane', 'SDFSFSGSD334VF23', 'Rojo cereza', 19500000 )
+auto4 = Auto('Tesla', 'SDFSF3545XCV23456', 'Negro', 95500000)
+auto5 = Auto('Nissan Pajero', 'DSDFGS33424XCXC', 'Rojo cereza', 45500000)
+auto6 = Auto('Peugeot 406', '454FGF454VHGB923GH', 'Blanco', 35000000)
+
+lista_autos = [auto1, auto2, auto3, auto4, auto5, auto6]
+
+
+def multiplicador_iva(valor):
+    if valor <= 20000000:
+        return 1.15
+    else:
+        sobrevalor = valor - 20000001
+        return ((sobrevalor//15000000)*0.05)+1.20
+
+multiplicador_iva(65000000)
+#"""1.3"""
+
+
+
+def cantidad_color(color):
+
+    c = 0
+    n = 0
+
+    for auto in lista_autos:
+        if color == auto.color:
+            n += 1
+            c += int(auto.precio * multiplicador_iva(auto.precio))
+
+
+    return (n, c)
+
+
+cantidad_color('Negro')
+#"""(1, 138475000.0)"""
+
+cantidad_color('Rojo cereza')
+#"""(3, 109900000.0)"""</textarea>
+
 
     <h3>Punto 6</h3>
 
-    <textarea name="name" rows="13" cols="80" value="pruebaaa">def factorial(n):
+    <textarea name="name" rows="13" cols="80" value="" readonly>def factorial(n):
         if n < 0:
             raise ValueError("Por favor, introduce un valor positivo.")
 
